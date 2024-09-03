@@ -6,9 +6,7 @@ public:
         
         while (v > 0) {
             int a = v % 10;
-            // if (c > (INT_MAX - a) / 10) { 
-            //     return 0; // Return 0 in case of overflow
-            // }
+            
             if ((c>INT_MAX/10) || (c==INT_MAX/10 && a>7) ) return 0;
             if ((c<INT_MIN/10) || (c==INT_MIN/10 && a<-8)) return 0;
             c = c * 10 + a;
