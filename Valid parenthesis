@@ -1,0 +1,35 @@
+#include <iostream>
+#include <stack>
+#include <unordered_map>
+
+using namespace std;
+
+bool isValid(string s) {
+    // Stack to store the open brackets
+    stack<char> st;
+    
+    // Map to store matching pairs of brackets
+    unordered_map<char, char> matchingBrackets = {
+        {')', '('},
+        {'}', '{'},
+        {']', '['}
+    };
+    
+    // Traverse through the string
+    for (char c : s) {
+        // If it's a closing bracket, check for a matching opening bracket
+        if (matchingBrackets.count(c)) {
+            if (!st.empty() && st.top() == matchingBrackets[c]) {
+                st.pop(); // Valid matching, so pop the opening bracket from stack
+            } else {
+                return false; // No matching opening bracket found
+            }
+        } else {
+            // If it's an opening bracket, push it to the stack
+            st.push(c);
+        }
+    }
+    
+    // If stack is empty, all brackets were matched correctly
+    return st.empty();
+}
